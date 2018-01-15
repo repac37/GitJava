@@ -11,6 +11,9 @@ public class Demo {
 		data.dissIt();
 		data.dissIt();
 		
+		data.dissIt();
+		data.dissIt();
+		
 	}
 	
 	public static int summation(int n){
