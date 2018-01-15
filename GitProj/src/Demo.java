@@ -9,6 +9,7 @@ public class Demo {
 		System.out.println("RÖsultat "+finalResult);
 		data.display();
 		data.dissIt();
+		data.dissIt();
 		
 	}
 	
