@@ -6,5 +6,9 @@ public class SalesData {
 	public void display(){
 		System.out.println("Mickey: Implement data display");
 	}
+	
+	public void dissIt(){
+		System.out.println("Ulgly mother fucker called micky");
+	}
 		
 }
