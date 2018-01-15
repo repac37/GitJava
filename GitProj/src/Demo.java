@@ -12,7 +12,7 @@ public class Demo {
 	}
 	
 	public static int summation(int n){
-		int result = n+2;
+		int result = n+100;
 		return result;
 	}
 	
