@@ -8,6 +8,7 @@ public class Demo {
 		int finalResult = summation(input);
 		System.out.println("Result: "+finalResult);
 		data.display();
+		System.out.println("New shiet");
 		
 	}
 	
