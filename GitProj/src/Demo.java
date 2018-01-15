@@ -6,9 +6,9 @@ public class Demo {
 		SalesData data = new SalesData();
 		int input = 10;
 		int finalResult = summation(input);
-		System.out.println("Result: "+finalResult);
+		System.out.println("RÖsultat "+finalResult);
 		data.display();
-		System.out.println("New shiet");
+		data.dissIt();
 		
 	}
 	
