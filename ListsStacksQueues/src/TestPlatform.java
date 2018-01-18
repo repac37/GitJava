@@ -1,11 +1,10 @@
-import MyArray.OurArray;
-import MyArray.MyArrayList;
+import linkedlists.OurLinkedList;
 
 public class TestPlatform {
 
 	private void run() {
 		//MyArrayList<Integer> mA = new MyArrayList<>();
-		OurArray<Integer> bA = new OurArray<>();
+		OurLinkedList<Integer> bA = new OurLinkedList<>();
 
 		
 		int x = 3;
@@ -19,19 +18,19 @@ public class TestPlatform {
 			bA.add(i);
 		}
 		
-		
-		
 		for(int e : bA){
 			System.out.print(e+" ,");
 		}
 		
-		bA.removeAtIndex(3);
-		bA.removeLast();	
-			
+		int remove = bA.remove(2);
+		
 		System.out.println();
 		for(int e : bA){
 			System.out.print(e+" ,");
 		}
+		System.out.println();
+		
+		System.out.println(remove);
 		
 		 
 	}

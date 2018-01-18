@@ -2,12 +2,13 @@ package linkedlists;
 
 import java.util.Iterator;
 
-public class MyLinkedList<E> implements Iterable<E> {
+public class OurLinkedList<E> implements Iterable<E> {
 	
 	private int theSize;
 	private int modCount = 0;
 	private Node<E> beginMarker;
 	private Node<E> endMarker;
+	
 	
 	private static class Node<E>{
 		public E data;
@@ -21,7 +22,7 @@ public class MyLinkedList<E> implements Iterable<E> {
 		}
 	}
 	
-	public MyLinkedList(){
+	public OurLinkedList(){
 		doClear();
 	}
 	
@@ -136,7 +137,7 @@ public class MyLinkedList<E> implements Iterable<E> {
 				throw new IllegalStateException();
 			}
 			
-			MyLinkedList.this.remove(current.prev);
+			OurLinkedList.this.remove(current.prev);
 			expectedModCount++;
 			okToRemove = false;
 		}
