@@ -79,6 +79,7 @@ public class OurLinkedList<E> implements Iterable<E> {
 	private Node<E> getNode(int index){
 		return getNode(index, 0, size()-1);
 	}
+	
 	private Node<E> getNode(int index, int lower, int upper) {
 		Node<E> p;
 		if( index < lower || index > upper){
