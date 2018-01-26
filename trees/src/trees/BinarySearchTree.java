@@ -29,7 +29,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 	public BinarySearchTree(){
 		makeEmpty();
 	}
-	void makeEmpty(){
+	public void makeEmpty(){
 		root = null;
 	}
 	
@@ -67,15 +67,14 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 		}
 	}
 	
-
 	private void printTree(Node<T> t) {
 		if(t!=null){
 			printTree(t.leftChild);
 			System.out.println(t.data);
 			printTree(t.rightChild);
 		}
-		
 	}
+	
 	private Node<T> remove(T elem, Node<T> t) {
 		if(t == null){
 			return t;
@@ -84,13 +83,20 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 		int compareResult = elem.compareTo(t.data);
 		
 		if(compareResult<0){
+			System.out.println(t.data + " Left");
+			System.out.println(t.leftChild.data);
 			t.leftChild = remove(elem, t.leftChild); 
+			
 		}else if(compareResult>0){
+			System.out.println(t.data + " Right");
+			System.out.println(t.rightChild.data);
 			t.rightChild = remove(elem, t.rightChild);
 		}else if( t.leftChild != null && t.rightChild != null){
+			System.out.println("bör ej");
 			t.data = findMin(t.rightChild).data;
 			t.rightChild = remove(t.data, t.rightChild);
 		}else{
+			System.out.println("bör");
 			t = (t.leftChild != null) ? t.leftChild : t.rightChild;
 		}
 		
