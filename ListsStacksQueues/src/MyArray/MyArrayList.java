@@ -38,7 +38,7 @@ public class MyArrayList<T> implements Iterable<T> {
 	}
 	
 	private void ensureCapacity(int newCapacity) {
-		System.out.println("ny size");
+	
 		if(newCapacity < theSize){
 			return;
 		}

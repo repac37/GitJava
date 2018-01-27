@@ -1,37 +1,66 @@
-import linkedlists.OurLinkedList;
+import java.util.Iterator;
 
+import MyArray.DynamicArrayTwo;
+import MyArray.MyArrayList;
 public class TestPlatform {
 
 	private void run() {
 		//MyArrayList<Integer> mA = new MyArrayList<>();
-		OurLinkedList<Integer> bA = new OurLinkedList<>();
+		DynamicArrayTwo<Float> bA = new DynamicArrayTwo<>();
 
 		
-		int x = 3;
-		int y = 4;
+		float x = 3.0f;
+		float y = 4.2f;
 		
 		bA.add(x);
 		bA.add(y);
-	
+		
+		
+		
 
 		for(int i = 0; i < 5; i++){
-			bA.add(i);
+			bA.add((float)i);
 		}
 		
-		for(int e : bA){
+		
+		
+	
+
+		bA.add(2, 540f);
+		bA.add(0, 70f);
+		bA.add(0, 170f);
+		bA.add(2f);
+		bA.add(2f);
+		bA.add(2f);
+		bA.add(2f);
+		bA.add(2f);
+		
+		for(float e : bA){
 			System.out.print(e+" ,");
 		}
 		
-		int remove = bA.remove(2);
+		System.out.println();
+		
+		Iterator<Float> ir = bA.iterator();
+		while(ir.hasNext()){
+			
+			if(2f == ir.next()){
+				ir.remove();
+			}
+		}
+	
+		
+	
+		
 		
 		System.out.println();
-		for(int e : bA){
+		for(float e : bA){
 			System.out.print(e+" ,");
 		}
-		System.out.println();
 		
-		System.out.println(remove);
 		
+	
+	
 		 
 	}
 	
