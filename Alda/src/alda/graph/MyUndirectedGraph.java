@@ -2,7 +2,7 @@ package alda.graph;
 
 import java.util.List;
 
-public class MyUndirectedGraph<T> implements UndirectedGraph {
+public class MyUndirectedGraph<T> implements UndirectedGraph<T> {
 
 	@Override
 	public int getNumberOfNodes() {
