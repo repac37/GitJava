@@ -5,9 +5,6 @@ import java.util.List;
 
 public interface UndirectedGraph<T> {
 	
-	public UndirectedGraph(){
-		
-	}
 	// ToDo: metod för att räkna den totala vikten
 
 	/**
