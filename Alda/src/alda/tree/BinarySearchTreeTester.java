@@ -19,7 +19,6 @@ public class BinarySearchTreeTester {
 		assertEquals("[]", tree.toString());
 	}
 
-
 	@Before
 	public void setUp() throws Exception {
 		tree.add(5);
@@ -28,8 +27,9 @@ public class BinarySearchTreeTester {
 		tree.add(3);
 		tree.add(6);
 		tree.add(1);
+		
 	}
-
+	
 	@Test
 	public void testAddUnique() {
 		for (int n = 1; n <= 6; n++) {
