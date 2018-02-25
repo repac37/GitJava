@@ -14,18 +14,18 @@ public class Tree {
 		BST.insert(656);
 		BST.insert(565);
 		BST.insert(56);
-		BST.insert(34);
 		BST.insert(33);
 		BST.insert(4);
 		BST.insert(22);
 		BST.insert(12);
 		BST.insert(1);
+		BST.insert(35);
+	
+		System.out.println();
+		BST.remove(34);
+	
 		
-		
-		
-		BST.printTree();
-		
-		BST.getRoot();
+	
 		
 	}
 }
