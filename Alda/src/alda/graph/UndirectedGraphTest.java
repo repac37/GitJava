@@ -42,6 +42,7 @@ public class UndirectedGraphTest {
 	@Test
 	public void testConnect() {
 		addExampleNodes();
+		
 		assertFalse(graph.isConnected("A", "Z"));
 		assertFalse(graph.connect("A", "Z", 5));
 		assertEquals(-1, graph.getCost("A", "Z"));
