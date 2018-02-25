@@ -1,3 +1,5 @@
+ //	Mikael Tofvesson: mito2023@student.su.se, Emil Oja: emoj8928@student.su.se
+
 package alda.graph;
 
 import java.util.*;
