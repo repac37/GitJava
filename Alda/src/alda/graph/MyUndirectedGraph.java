@@ -69,7 +69,8 @@ public class MyUndirectedGraph<T> implements UndirectedGraph<T> {
 		if (noder.containsKey(newNode)) {
 			return false;
 		} else {
-			noder.put(newNode, new Node<T>(newNode));
+			Node<T> tmp = new Node<T>(newNode);
+			noder.put(newNode, tmp);
 			return true;
 		}
 	}
