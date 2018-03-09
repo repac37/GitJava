@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Mikael Tofvesson: mito2023@student.su.se & Emil Oja:
  *         emoj8928@student.su.se
  * @version 1.0
- * 
+ * @since   2018-03-09
  */
 
 public class Huffman {
@@ -55,16 +55,6 @@ public class Huffman {
 
 	}
 
-	/**
-	 * This method takes a string as input and creates
-	 * 
-	 * @param message
-	 *            message is the String to be compressed with the Huffman
-	 *            Algorithm
-	 * @throws IllegalArgumentException
-	 *             If the message is an empty string IllegalArgumentException is
-	 *             thrown
-	 */
 	public void input(String message) {
 		emptyMaps();
 		if (message.isEmpty()) {
