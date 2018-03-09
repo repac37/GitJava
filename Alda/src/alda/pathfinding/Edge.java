@@ -1,4 +1,4 @@
-package alda.dijkstra;
+package alda.pathfinding;
 
 public class Edge<T extends Comparable<T>> {
 
@@ -6,6 +6,7 @@ public class Edge<T extends Comparable<T>> {
 	private Node<T> node2;
 	private int distance;
 
+	
 	public Edge(Node<T> node1, Node<T> node2, int distance) {
 		this.node1 = node1;
 		this.node2 = node2;
@@ -24,7 +25,7 @@ public class Edge<T extends Comparable<T>> {
 		return this.distance;
 	}
 	
-	public void getDistance(int dist) {
+	public void setDistance(int dist) {
 		this.distance = dist;
 	}
 

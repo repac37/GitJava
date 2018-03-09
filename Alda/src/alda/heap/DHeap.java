@@ -45,7 +45,7 @@ public class DHeap<AnyType extends Comparable<? super AnyType>> {
 		array = (AnyType[]) new Comparable[DEFAULT_CAPACITY];
 	}
 	
-	/**dsfwef
+	/**
 	 * Insert into the priority queue, maintaining heap order. Duplicates are
 	 * allowed.
 	 * 

@@ -1,11 +1,18 @@
- /**
-  * 	Mikael Tofvesson: mito2023@student.su.se och Emil Oja: emoj8928@student.su.se
-  */
-
 package alda.huffman;
 
 import java.util.*;
 import java.util.Scanner;
+
+/**
+ * 
+ * This class compresses a string of the users choice with Huffman’s algorithm
+ * and then decompresses it.
+ * 
+ * @author Mikael Tofvesson: mito2023@student.su.se & Emil Oja:
+ *         emoj8928@student.su.se
+ * @version 1.0
+ * 
+ */
 
 public class Huffman {
 
@@ -48,20 +55,23 @@ public class Huffman {
 
 	}
 
+	/**
+	 * This method takes a string as input and creates
+	 * 
+	 * @param message
+	 *            message is the String to be compressed with the Huffman
+	 *            Algorithm
+	 * @throws IllegalArgumentException
+	 *             If the message is an empty string IllegalArgumentException is
+	 *             thrown
+	 */
 	public void input(String message) {
 		emptyMaps();
 		if (message.isEmpty()) {
 			throw new IllegalArgumentException("Strängen får inte var tom");
 		}
-		for (char e : message.toCharArray()) {
-			if (charFrequencys.containsKey(e)) {
-				charFrequencys.get(e).frequency++;
-			} else {
-				charFrequencys.put(e, new Node(e));
-			}
-		}
 
-		//printFreq();
+		charFrequencys(message);
 		createHuffmanTree();
 		if (charFrequencys.size() == 1) {
 			codeIndex.put(root.data, "0");
@@ -71,6 +81,16 @@ public class Huffman {
 		}
 		encode(message);
 
+	}
+
+	private void charFrequencys(String message) {
+		for (char e : message.toCharArray()) {
+			if (charFrequencys.containsKey(e)) {
+				charFrequencys.get(e).frequency++;
+			} else {
+				charFrequencys.put(e, new Node(e));
+			}
+		}
 	}
 
 	private void printFreq() {
@@ -119,7 +139,23 @@ public class Huffman {
 		System.out.println("encode: " + encode);
 	}
 
+	/**
+	 * This method decodes the stored "binary" String <code>encode</code> and returns it to
+	 * the original state. This method uses two StringBuilder objects, <code>tmp</code> and
+	 * <code>scDecode</code>. Iteration is done over the String <code>encode</code>. During iteration each
+	 * char is appened to <code>tmp</code>. If the Map <code>decodeIndex</code> contains a key
+	 * equal to <code>tmp</code>, its value is appended to <code>sbcodeDecode</code> and <code>tmp</code> is emptied. When
+	 * the iteration is done the <code>sbDecode.toString()</code> is returned.
+	 * 
+	 * @return String - This return a decoded message stored in this class as
+	 *         string.
+	 * @throws NullPointerException
+	 *             If the stored String "encode" is null or empty
+	 */
 	public String decode() {
+		if (encode == null || encode.isEmpty()) {
+			throw new NullPointerException("Det finns inget att avkoda.");
+		}
 		StringBuilder tmp = new StringBuilder();
 		StringBuilder sbDecode = new StringBuilder();
 		for (char e : encode.toCharArray()) {
@@ -135,8 +171,9 @@ public class Huffman {
 	private void emptyMaps() {
 		charFrequencys.clear();
 		codeIndex.clear();
-		decodeIndex.clear();;
-		
+		decodeIndex.clear();
+		;
+
 	}
 
 	public static void main(String args[]) {
@@ -150,16 +187,16 @@ public class Huffman {
 			System.out.print("Enter something: ");
 			String inputString = input.nextLine();
 			hm.input(inputString);
-			System.out.println("decode: " + hm.decode()+"\n");
+			System.out.println("decode: " + hm.decode() + "\n");
 			System.out.print("Quit? (Y/N): ");
 			inputString = input.nextLine();
-			if(inputString.toLowerCase().equals("y") || inputString.toLowerCase().equals("yes")){
+			if (inputString.toLowerCase().equals("y") || inputString.toLowerCase().equals("yes")) {
 				System.out.println("Bye..");
-				break; 
-			} 
+				break;
+			}
 			System.out.println();
 		}
-		
+
 		input.close();
 
 	}

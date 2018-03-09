@@ -1,4 +1,4 @@
-package alda.dijkstra;
+package alda.pathfinding;
 
 import java.util.*;
 
@@ -33,16 +33,20 @@ public class Graph<T extends Comparable<T>> {
 		Edge<T> edge = new Edge<T>(n1, n2, distance);
 
 		if (edgeMap.containsKey(edge.hashCode())) {
-			edge.getDistance(distance);
+			edge.setDistance(distance);
 			return true;
 		}
 		edgeMap.put(edge.hashCode(), edge);
 		n1.addToAdj(n2);
-		n2.addToAdj(n2);
+		//n2.addToAdj(n2);
 
 		return true;
 	}
-
+	
+	public boolean isConnected(Node<T> n1, Node<T> n2){
+		return edgeMap.containsKey(egdeHashCodeGenerator(n1,n2));
+	}
+	
 	public Map<T, Node<T>> getAllNodes() {
 		return nodeMap;
 	}

@@ -1,29 +1,35 @@
-package alda.dijkstra;
+package alda.pathfinding;
 
 import java.util.*;
 
-public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
+public class Node<T extends Comparable<T>> implements Comparable<Node<T>>,  Comparator<Node<T>>  {
 	
 	private T data;
 	private int distance;
 	private boolean known;
 	private Node<T> path;
 	private List<Node<T>> adj;
+	private Node<T> parent;
+	private float f;
+	private float g;
+	private float h;
 	
 	public Node(T node){
 		this.data = node;
 		this.setDistance(Integer.MAX_VALUE);
 		this.known = false;
 		this.path = null;
-		
 	}
+	
+
 
 	public T getValue() {
 		return data;
 	}
 
 	public int getDistance() {
-		return distance;
+		
+		return (this.known!=false&&distance==Integer.MAX_VALUE)?0:distance;
 	}
 
 	public void setDistance(int distance) {
@@ -64,6 +70,15 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 		return node.data.compareTo(this.data);
 	}
 	
+	@Override
+	public int compare(Node<T> n1, Node<T> n2) {
+		if (n1.getDistance() > n2.getDistance()) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+	
 	public boolean equals(Node<T> other) {
 		return other.data.equals(this.data);
 	}
@@ -71,6 +86,19 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 	@Override
 	public String toString() {
 		return this.data.toString();
+	}
+
+	public Node<T> getParent() {
+		return parent;
+	}
+
+	public void setParent(Node<T> parent) {
+		this.parent = parent;
+	}
+
+	public void compute() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
