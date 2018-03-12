@@ -126,7 +126,7 @@ public class Huffman {
 	 * over the String <code>encode</code>. During iteration each char is
 	 * appened to <code>tmp</code>. If the Map <code>decodeIndex</code> contains
 	 * a key equal to <code>tmp</code>, its value is appended to
-	 * <code>sbcodeDecode</code> and <code>tmp</code> is emptied. When the
+	 * <code>sbDecode</code> and <code>tmp</code> is emptied. When the
 	 * iteration is done the <code>sbDecode.toString()</code> is returned.
 	 * 
 	 * @return String - This return a decoded message stored in this class as

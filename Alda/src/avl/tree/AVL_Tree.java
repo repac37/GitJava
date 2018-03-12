@@ -24,17 +24,8 @@ public class AVL_Tree<T extends Comparable<T>> {
 		return true;
 	}
 
-	public int size() {
-		return currentSize;
-	}
-
-	public void clear() {
-		this.root = null;
-		currentSize = 0;
-	}
-
 	private void add(AVLNode<T> parent, AVLNode<T> newNode) {
-		if (newNode.compareTo(parent) > 0) {
+		if (newNode.getValue().compareTo(parent.getValue()) > 0) {
 			if (parent.getRight() == null) {
 				parent.setRight(newNode);
 				newNode.setParent(parent);
@@ -56,7 +47,7 @@ public class AVL_Tree<T extends Comparable<T>> {
 
 	private void checkBalance(AVLNode<T> node) {
 
-		if ((height(node.getLeft()) - height(node.getRight())) > 1) {
+		if (balanceFactor(node) > 1||balanceFactor(node)<-1) {
 			rebalance(node);
 		}
 		if (node.getParent() == null) {
@@ -65,49 +56,32 @@ public class AVL_Tree<T extends Comparable<T>> {
 		checkBalance(node.getParent());
 	}
 
-	public int depth() {
-		return height();
-	}
-
-	private int height() {
-		if (root == null) {
-			return -1;
-		} else {
-			return height(root) - 1;
-		}
-	}
-
-	private int height(AVLNode<T> node) {
-		if (node == null) {
-			return 0;
-		} else {
-			
-			int leftHeight = height(node.getLeft())+1;
-			int rightHeight = height(node.getRight()) + 1;
-			
-			return leftHeight>rightHeight?leftHeight:rightHeight;
-		}
-	}
-
 	private void rebalance(AVLNode<T> node) {
-		if (height(node.getLeft()) - height(node.getRight()) > 1) {
-			if (height(node.getLeft().getLeft()) > height(node.getLeft().getRight())) {
+		if (balanceFactor(node) > 1) {
+			if (rotationFactorCaseOne(node)) {
+				
 				node = rightRotate(node);
 			} else {
-				node = leftRightRotate(node);
+				
+				node = doubelLeftRightRotate(node);
+//				System.out.println(node.getValue());
+//				System.out.println(node.getRight().getValue());
+//				System.out.println(node.getRight().getRight().getValue());
 			}
 		} else {
-			if (height(node.getRight().getRight()) > height(node.getRight().getLeft())) {
+			if (rotationFactorCaseTwo(node)) {
 				node = leftRotate(node);
+				
 			} else {
-				node = rightLeftRotate(node);
+				node = doubelRightLeftRotate(node);
+				
 			}
 		}
 		if (node.getParent() == null) {
 			root = node;
 		}
 	}
-
+	
 	private AVLNode<T> rightRotate(AVLNode<T> node) {
 
 		AVLNode<T> tmp = node.getLeft();
@@ -123,7 +97,7 @@ public class AVL_Tree<T extends Comparable<T>> {
 	}
 
 	private AVLNode<T> leftRotate(AVLNode<T> node) {
-
+		
 		AVLNode<T> tmp = node.getRight();
 		if (node.getParent() != null) {
 			node.getParent().setRight(tmp);
@@ -132,18 +106,60 @@ public class AVL_Tree<T extends Comparable<T>> {
 		tmp.setLeft(node);
 		tmp.setParent(node.getParent());
 		node.setParent(tmp);
-
+		System.out.println("left"+tmp.getValue());
 		return tmp;
 	}
 
-	private AVLNode<T> leftRightRotate(AVLNode<T> node) {
-		node.setLeft(leftRotate(node.getLeft()));
+	private AVLNode<T> doubelLeftRightRotate(AVLNode<T> node) {
+		AVLNode<T> tmp = leftRotate(node.getLeft());
+		System.out.println(tmp.getParent().getRight());
+		node.setLeft(tmp.getLeft());
+		
+//		System.out.println(node.getRight().getValue());
+//		System.out.println(node.getValue());
+//		System.out.println(node.getLeft().getValue());
+//		System.out.println(node.getLeft().getLeft().getValue());
 		return rightRotate(node);
 	}
 
-	private AVLNode<T> rightLeftRotate(AVLNode<T> node) {
+	private AVLNode<T> doubelRightLeftRotate(AVLNode<T> node) {
 		node.setRight(rightRotate(node.getRight()));
 		return leftRotate(node);
+	}
+	
+	private boolean rotationFactorCaseTwo(AVLNode<T> node) {
+		return height(node.getRight().getRight()) > height(node.getRight().getLeft());
+	}
+
+	private boolean rotationFactorCaseOne(AVLNode<T> node) {
+		return height(node.getLeft().getLeft()) > height(node.getLeft().getRight());
+	}
+	
+	private int balanceFactor(AVLNode<T> node) {
+		return height(node.getLeft()) - height(node.getRight());
+	}
+
+	public int depth() {
+		return height();
+	}
+
+	private int height() {
+		if (root == null) {
+			return -1;
+		} else {
+			return height(root) - 1;
+		}
+	}
+
+	private int height(AVLNode<T> node) {
+
+		if (node == null) {
+			return 0;
+		}
+		
+		int leftHeight = height(node.getLeft()) + 1;
+		int rightHeight = height(node.getRight()) + 1;
+		return leftHeight > rightHeight ? leftHeight : rightHeight;
 	}
 
 	public T getRootValue() {
@@ -151,7 +167,7 @@ public class AVL_Tree<T extends Comparable<T>> {
 	}
 
 	public boolean contains(T data) {
-		return root == null ? false : contains(data,root);
+		return root == null ? false : contains(data, root);
 	}
 
 	private boolean contains(T data, AVLNode<T> node) {
@@ -170,7 +186,7 @@ public class AVL_Tree<T extends Comparable<T>> {
 	}
 
 	public boolean remove(T data) {
-	
+
 		int originalSize = size();
 		AVLNode<T> tmp = null;
 		if (root != null) {
@@ -214,19 +230,27 @@ public class AVL_Tree<T extends Comparable<T>> {
 		}
 		return findMin(node.getLeft());
 	}
-	
+
 	public AVLNode<T> findMax(AVLNode<T> node) {
-		if(node != null){
-			while(node.getRight() != null){
+		if (node != null) {
+			while (node.getRight() != null) {
 				node = node.getRight();
 			}
 		}
 		return node;
 	}
-	
+
+	public int size() {
+		return currentSize;
+	}
+
+	public void clear() {
+		this.root = null;
+		currentSize = 0;
+	}
+
 	public String toString() {
 		return "[" + (root == null ? "" : root.toString()) + "]";
 	}
-
 
 }

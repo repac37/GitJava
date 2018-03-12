@@ -1,28 +1,20 @@
 package avl.tree;
 
-
-
-public class AVLNode<T extends Comparable<T>> implements Comparable<AVLNode<T>> {
+public class AVLNode<T extends Comparable<T>> {
 	private T data;
 	private AVLNode<T> left;
 	private AVLNode<T> right;
 	private AVLNode<T> parent;
 
-	
 	public AVLNode(T data) {
 		this.data = data;
 		setParent(null);
 		setRight(null);
 		setLeft(null);
 	}
-	
-	public T getValue(){
+
+	public T getValue() {
 		return this.data;
-	}
-	
-	@Override
-	public int compareTo(AVLNode<T> other) {
-		return data.compareTo(other.getValue());
 	}
 
 	public AVLNode<T> getRight() {
@@ -40,11 +32,11 @@ public class AVLNode<T extends Comparable<T>> implements Comparable<AVLNode<T>> 
 	public void setLeft(AVLNode<T> left) {
 		this.left = left;
 	}
-	
-	public void setValue(T data){
-		this.data=data;		
+
+	public void setValue(T data) {
+		this.data = data;
 	}
-	
+
 	public AVLNode<T> getParent() {
 		return parent;
 	}
@@ -52,11 +44,11 @@ public class AVLNode<T extends Comparable<T>> implements Comparable<AVLNode<T>> 
 	public void setParent(AVLNode<T> parent) {
 		this.parent = parent;
 	}
-			
-	public String print(){
+
+	public String print() {
 		return this.getValue().toString();
 	}
-	
+
 	public String toString() {
 		StringBuilder s = printTree(this);
 		s.replace(s.length() - 2, s.length(), "");
@@ -73,5 +65,5 @@ public class AVLNode<T extends Comparable<T>> implements Comparable<AVLNode<T>> 
 		return s;
 
 	}
-	
+
 }
