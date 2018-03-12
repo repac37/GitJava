@@ -93,7 +93,6 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	}
 
 	public boolean contains(T data) {
-
 		return contains(data, this);
 	}
 
@@ -128,7 +127,6 @@ public class BinarySearchTreeNode<T extends Comparable<T>> {
 	}
 
 	public int depth() {
-
 		return depth(this);
 	}
 

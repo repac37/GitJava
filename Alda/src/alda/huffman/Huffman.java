@@ -11,12 +11,10 @@ import java.util.Scanner;
  * @author Mikael Tofvesson: mito2023@student.su.se & Emil Oja:
  *         emoj8928@student.su.se
  * @version 1.0
- * @since   2018-03-09
+ * @since 2018-03-09
  */
 
 public class Huffman {
-
-	private Scanner input = new Scanner(System.in);
 
 	private Map<Character, Node> charFrequencys = new HashMap<>();
 	private Node root;
@@ -56,19 +54,21 @@ public class Huffman {
 	}
 
 	public void input(String message) {
-		emptyMaps();
 		if (message.isEmpty()) {
 			throw new IllegalArgumentException("Strängen får inte var tom");
 		}
+		emptyMaps();
 
 		charFrequencys(message);
 		createHuffmanTree();
+
 		if (charFrequencys.size() == 1) {
 			codeIndex.put(root.data, "0");
 			decodeIndex.put("0", root.data);
 		} else {
 			createCodes(root, "");
 		}
+
 		encode(message);
 
 	}
@@ -83,14 +83,15 @@ public class Huffman {
 		}
 	}
 
-	private void printFreq() {
-		System.out.println("Frequency tabel:");
-
-		for (Map.Entry<Character, Node> set : charFrequencys.entrySet()) {
-			System.out.println(set.getKey() + " : " + set.getValue().frequency);
+	private void createHuffmanTree() {
+		PriorityQueue<Node> pq = new PriorityQueue<>(charFrequencys.values());
+		while (pq.size() > 1) {
+			Node left = pq.poll();
+			Node right = pq.poll();
+			Node t = new Node(left, right);
+			pq.add(t);
 		}
-		System.out.println("Size:" + charFrequencys.size());
-
+		root = pq.poll();
 	}
 
 	private void createCodes(Node node, String code) {
@@ -108,17 +109,6 @@ public class Huffman {
 		}
 	}
 
-	private void createHuffmanTree() {
-		PriorityQueue<Node> pq = new PriorityQueue<>(charFrequencys.values());
-		while (pq.size() > 1) {
-			Node left = pq.poll();
-			Node right = pq.poll();
-			Node t = new Node(left, right);
-			pq.add(t);
-		}
-		root = pq.poll();
-	}
-
 	private void encode(String message) {
 		StringBuilder sbEncode = new StringBuilder();
 		for (char e : message.toCharArray()) {
@@ -130,12 +120,14 @@ public class Huffman {
 	}
 
 	/**
-	 * This method decodes the stored "binary" String <code>encode</code> and returns it to
-	 * the original state. This method uses two StringBuilder objects, <code>tmp</code> and
-	 * <code>scDecode</code>. Iteration is done over the String <code>encode</code>. During iteration each
-	 * char is appened to <code>tmp</code>. If the Map <code>decodeIndex</code> contains a key
-	 * equal to <code>tmp</code>, its value is appended to <code>sbcodeDecode</code> and <code>tmp</code> is emptied. When
-	 * the iteration is done the <code>sbDecode.toString()</code> is returned.
+	 * This method decodes the stored "binary" String <code>encode</code> and
+	 * returns it to the original state. This method uses two StringBuilder
+	 * objects, <code>tmp</code> and <code>scDecode</code>. Iteration is done
+	 * over the String <code>encode</code>. During iteration each char is
+	 * appened to <code>tmp</code>. If the Map <code>decodeIndex</code> contains
+	 * a key equal to <code>tmp</code>, its value is appended to
+	 * <code>sbcodeDecode</code> and <code>tmp</code> is emptied. When the
+	 * iteration is done the <code>sbDecode.toString()</code> is returned.
 	 * 
 	 * @return String - This return a decoded message stored in this class as
 	 *         string.
@@ -172,14 +164,15 @@ public class Huffman {
 
 	private void run() {
 		Huffman hm = new Huffman();
+		Scanner scanner = new Scanner(System.in);
 		boolean exit = false;
 		while (!exit) {
 			System.out.print("Enter something: ");
-			String inputString = input.nextLine();
+			String inputString = scanner.nextLine();
 			hm.input(inputString);
 			System.out.println("decode: " + hm.decode() + "\n");
 			System.out.print("Quit? (Y/N): ");
-			inputString = input.nextLine();
+			inputString = scanner.nextLine();
 			if (inputString.toLowerCase().equals("y") || inputString.toLowerCase().equals("yes")) {
 				System.out.println("Bye..");
 				break;
@@ -187,7 +180,7 @@ public class Huffman {
 			System.out.println();
 		}
 
-		input.close();
+		scanner.close();
 
 	}
 }

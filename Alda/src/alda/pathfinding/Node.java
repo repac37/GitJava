@@ -10,9 +10,12 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>>,  Comp
 	private Node<T> path;
 	private List<Node<T>> adj;
 	private Node<T> parent;
-	private float f;
-	private float g;
-	private float h;
+	private int x,y;
+	private int nextDepart;
+	private int f = Integer.MAX_VALUE;
+	private int g = Integer.MAX_VALUE;
+	private double h = Integer.MAX_VALUE;
+	private Station station;
 	
 	public Node(T node){
 		this.data = node;
@@ -21,8 +24,18 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>>,  Comp
 		this.path = null;
 	}
 	
-
-
+	public Node(T node, int x, int y){
+		this(node);
+		this.setX(x);
+		this.setY(y);
+		setStation(new Station());
+	}
+	
+	public Node(T node, int x, int y, boolean sub, boolean bus){
+		this(node,x,y);
+		setStation(new Station(sub,bus));
+	}
+	
 	public T getValue() {
 		return data;
 	}
@@ -80,7 +93,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>>,  Comp
 	}
 	
 	public boolean equals(Node<T> other) {
-		return other.data.equals(this.data);
+		return this.getValue().equals(other.getValue());
 	}
 	
 	@Override
@@ -95,11 +108,71 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>>,  Comp
 	public void setParent(Node<T> parent) {
 		this.parent = parent;
 	}
+	
 
-	public void compute() {
-		// TODO Auto-generated method stub
+	public double getH() {
+		return this.h;
+	}
+	
+	public void setH(Node<T> goal) {
+		
+		this.h= Math.sqrt(Math.pow(goal.getX()-this.getX(),2)+Math.pow(goal.getY()-this.getY(),2));
+	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getG() {
+		return g;
+	}
+
+	public void setG(int g) {
+		this.g = g;
+	}
+
+	public int getF() {
+		return f;
+	}
+
+	public void setF() {
+		this.f =  this.g + (int) Math.round(this.h) + nextDepart;
+	}
+	
+	public void setNextDepart(int hour, int min){
+		nextDepart = this.station.getSchedule().nextDepature(hour, min);
+	}
+	
+	public Station getStation() {
+		return station;
+	}
+
+	public void setStation(Station station) {
+		this.station = station;
+	}
+
+	public void combindSchedule() {
+		this.station.combind();
 		
 	}
+
+	public void setSchedule() {
+		this.station.setSchedule();
+	}
+	
+	
 	
 	
 }
